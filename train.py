@@ -14,7 +14,7 @@ import src.cluster_train as cl
 import src.get_comments as gc
 import src.preprocessing_text as pt
 
-config_path = os.path.join('/Users/miracl6/airflow-mlflow-tutorial/config/params_all.yaml')
+config_path = os.path.join('./config/params_all.yaml')
 config = yaml.safe_load(open(config_path))['train']
 os.chdir(config['dir_folder'])
 SEED = config['SEED']

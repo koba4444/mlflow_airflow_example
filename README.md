@@ -35,13 +35,16 @@ kill -9 `ps aux | grep mlflow | awk '{print $2}'`
 
 1) Создаем отдельную директорию mkdir airflow
 
-2) Установка airflow pip install apache-airflow==2.0.1
-   --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.0.1/constraints-3.7.txt"
+2) Установка airflow pip install apache-airflow==2.0.1    --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.0.1/constraints-3.7.txt"
    export AIRFLOW_HOME=.
 
-3) Инициализаци БД airflow db init Также в файле конфигурации airflow.cfg прописать:
-   [webserver]
-   rbac = True
+3) Инициализаци БД 
+
+		airflow db init 
+
+Также в файле конфигурации airflow.cfg прописать:
+   	[webserver]
+   	rbac = True
 
 а также:
 load_examples = False

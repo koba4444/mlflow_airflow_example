@@ -1,20 +1,20 @@
 predict:
   SEED: 10
   comments:
-    YOUTUBE_API_KEY: ПОДСТАВЬ_СВОЙ_API_KEY
-    count_video: 20
+    YOUTUBE_API_KEY: AIzaSyDPNDTO39cSdmOs2tVdNRQ9B0SSoOn3UX0
+    count_video: 100
     limit: 30
     maxResults: 100
     nextPageToken: ''
-    query: дата сайенс
-  dir_folder: /Users/miracl6/airflow-mlflow-tutorial
+    query: хуй войне
+  dir_folder: .
   model_lr: LogisticRegression
   model_vec: vector_tfidf
   name_file: data/text.csv
   num_top: 10
   stopwords: russian
-  version_lr: 34
-  version_vec: 34
+  version_lr: 4
+  version_vec: 4
 train:
   SEED: 10
   clustering:
@@ -22,20 +22,20 @@ train:
     count_max_clusters: 15
     silhouette_metric: euclidean
   comments:
-    YOUTUBE_API_KEY: ПОДСТАВЬ_СВОЙ_API_KEY
-    count_video: 50
-    limit: 30
-    maxResults: 250
+    YOUTUBE_API_KEY: AIzaSyDPNDTO39cSdmOs2tVdNRQ9B0SSoOn3UX0
+    count_video: 1500
+    limit: 100
+    maxResults: 300
     nextPageToken: ''
-    query: дата сайенс
+    query: хуй войне
   cross_val:
     test_size: 0.3
-  dir_folder: /Users/miracl6/airflow-mlflow-tutorial
+  dir_folder: .
   model:
     class_weight: balanced
   model_lr: LogisticRegression
   model_vec: vector_tfidf
-  name_experiment: my_third
+  name_experiment: hv-1
   stopwords: russian
   tf_model:
-    max_features: 300
+    max_features: 500
