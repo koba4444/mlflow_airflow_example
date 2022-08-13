@@ -36,7 +36,7 @@ def main():
     comments = gc.get_all_comments(**config['comments'])
 
     # Загрузка последних сохраненнных моделей из MLFlow
-    mlflow.set_tracking_uri("http://localhost:5000")
+    mlflow.set_tracking_uri("http://109.120.189.173:5000")
     model_uri_lr = f"models:/{config['model_lr']}/{config['version_lr']}"
     model_uri_tf = f"models:/{config['model_vec']}/{config['version_vec']}"
 

@@ -1,4 +1,4 @@
-alembic==1.5.4
+alembic==1.4.1
 apache-airflow==2.0.1
 apache-airflow-providers-ftp==1.0.1
 apache-airflow-providers-google==1.0.0

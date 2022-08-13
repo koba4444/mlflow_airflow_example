@@ -1,10 +1,10 @@
 predict:
   SEED: 10
   comments:
-    YOUTUBE_API_KEY: AIzaSyDPNDTO39cSdmOs2tVdNRQ9B0SSoOn3UX0
-    count_video: 100
+    YOUTUBE_API_KEY: AIzaSyDXTU10FQMp8xCu9010qqyda-6xdKOjv18
+    count_video: 10
     limit: 30
-    maxResults: 100
+    maxResults: 10
     nextPageToken: ''
     query: хуй войне
   dir_folder: .
@@ -13,8 +13,8 @@ predict:
   name_file: data/text.csv
   num_top: 10
   stopwords: russian
-  version_lr: 4
-  version_vec: 4
+  version_lr: 13
+  version_vec: 13
 train:
   SEED: 10
   clustering:
@@ -22,12 +22,12 @@ train:
     count_max_clusters: 15
     silhouette_metric: euclidean
   comments:
-    YOUTUBE_API_KEY: AIzaSyDPNDTO39cSdmOs2tVdNRQ9B0SSoOn3UX0
-    count_video: 1500
-    limit: 100
-    maxResults: 300
+    YOUTUBE_API_KEY: AIzaSyDXTU10FQMp8xCu9010qqyda-6xdKOjv18
+    count_video: 15
+    limit: 5
+    maxResults: 20
     nextPageToken: ''
-    query: хуй войне
+    query: Херсон
   cross_val:
     test_size: 0.3
   dir_folder: .

@@ -1,9 +1,11 @@
 import logging
 import os
 
+
 import yaml
 from mlflow.tracking import MlflowClient
 from nltk.corpus import stopwords
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
@@ -18,6 +20,15 @@ config_path = os.path.join('./config/params_all.yaml')
 config = yaml.safe_load(open(config_path))['train']
 os.chdir(config['dir_folder'])
 SEED = config['SEED']
+
+#=====================================================
+#==== MLFLOW_S3_ENDPOINT_URL magically is equal MLFLOW_TRACKING_URI
+#===========================================================
+#os.environ['AWS_ACCESS_KEY_ID'] = 'admin'
+#os.environ['AWS_SECRET_ACCESS_KEY'] = 'sample_key'
+os.environ['MLFLOW_S3_ENDPOINT_URL'] = os.environ['MLFLOW_TRACKING_URI'][:-4] + '9000'
+#os.environ['MLFLOW_TRACKING_URI'] = 'http://109.120.189.173:5000'
+#=====================================================
 
 logging.basicConfig(filename='log/app.log', filemode='w+', format='%(asctime)s : %(levelname)s : %(message)s',
                     level=logging.DEBUG)
@@ -60,7 +71,7 @@ def main():
     clf_lr = LogisticRegression(**config['model'])
 
     # MLFlow трэкинг
-    mlflow.set_tracking_uri("http://localhost:5000")
+    mlflow.set_tracking_uri(os.environ.get('MLFLOW_TRACKING_URI'))
     mlflow.set_experiment(config['name_experiment'])
     with mlflow.start_run():
         clf_lr.fit(X_train, y_train)
@@ -72,8 +83,12 @@ def main():
                          accuracy_score(y_test, clf_lr.predict(X_test)))
         mlflow.log_param('precision',
                          cl.get_precision_score(y_test, clf_lr.predict(X_test), set(cluster_labels)))
+
+
+
         mlflow.sklearn.log_model(tfidf,
                                  artifact_path="vector",
+                                 #conda_env=mlflow.get_default_conda_env(),
                                  registered_model_name=f"{config['model_vec']}")
         mlflow.sklearn.log_model(clf_lr,
                                  artifact_path='model_lr',
