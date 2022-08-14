@@ -21,12 +21,26 @@ config = yaml.safe_load(open(config_path))['train']
 os.chdir(config['dir_folder'])
 SEED = config['SEED']
 
+config_secret_path = os.path.join('./config/params_secret.yaml')
+secret_config = yaml.safe_load(open(config_secret_path))
+mlflow_config = yaml.safe_load(open(config_secret_path))['mlflow']
+os.environ['AWS_ACCESS_KEY_ID'] = mlflow_config['AWS_ACCESS_KEY_ID']
+os.environ['AWS_SECRET_ACCESS_KEY'] = mlflow_config['AWS_SECRET_ACCESS_KEY']
+os.environ['MLFLOW_S3_ENDPOINT_URL'] = mlflow_config['MLFLOW_S3_ENDPOINT_URL']
+os.environ['MLFLOW_TRACKING_URI'] = mlflow_config['MLFLOW_TRACKING_URI']
+
+api_youtube = yaml.safe_load(open(config_secret_path))['api_youtube']
+
 #=====================================================
 #==== MLFLOW_S3_ENDPOINT_URL magically is equal MLFLOW_TRACKING_URI
 #===========================================================
 #os.environ['AWS_ACCESS_KEY_ID'] = 'admin'
 #os.environ['AWS_SECRET_ACCESS_KEY'] = 'sample_key'
-os.environ['MLFLOW_S3_ENDPOINT_URL'] = os.environ['MLFLOW_TRACKING_URI'][:-4] + '9000'
+#os.environ['MLFLOW_S3_ENDPOINT_URL'] = os.environ['MLFLOW_TRACKING_URI'][:-4] + '9000'
+#os.environ['MLFLOW_TRACKING_URI'] = 'http://109.120.189.173:5000'
+#os.environ['AWS_ACCESS_KEY_ID'] = 'admin'
+#os.environ['AWS_SECRET_ACCESS_KEY'] = 'sample_key'
+#os.environ['MLFLOW_S3_ENDPOINT_URL'] = os.environ['MLFLOW_TRACKING_URI'][:-4] + '9000'
 #os.environ['MLFLOW_TRACKING_URI'] = 'http://109.120.189.173:5000'
 #=====================================================
 
@@ -50,7 +64,7 @@ def main():
     Получение тематик из текста и сохранение модели
     """
     # Выгрузка топ комменариев
-    comments = gc.get_all_comments(**config['comments'])
+    comments = gc.get_all_comments(**config['comments'], **secret_config['api_youtube'])
 
     comments_clean = pt.get_clean_text(comments, stopwords.words(config['stopwords']))
     tfidf = TfidfVectorizer(**config['tf_model']).fit(comments_clean)

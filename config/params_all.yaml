@@ -1,12 +1,11 @@
 predict:
   SEED: 10
   comments:
-    YOUTUBE_API_KEY: AIzaSyDXTU10FQMp8xCu9010qqyda-6xdKOjv18
-    count_video: 10
+    count_video: 20
     limit: 30
-    maxResults: 10
+    maxResults: 20
     nextPageToken: ''
-    query: хуй войне
+    query: война
   dir_folder: .
   model_lr: LogisticRegression
   model_vec: vector_tfidf
@@ -22,12 +21,11 @@ train:
     count_max_clusters: 15
     silhouette_metric: euclidean
   comments:
-    YOUTUBE_API_KEY: AIzaSyDXTU10FQMp8xCu9010qqyda-6xdKOjv18
-    count_video: 15
+    count_video: 20
     limit: 5
     maxResults: 20
     nextPageToken: ''
-    query: Херсон
+    query: наука
   cross_val:
     test_size: 0.3
   dir_folder: .
